@@ -289,87 +289,88 @@ def mult(a,b):
     return prod 
 # define MyFloat divicion 
 def divs(x,y):
-             
-    a=x[0][::1],x[1][::1]     
-    b=y[0][::1],y[1][::1]
+	
+	DEC=30         
+	a=x[0][::1],x[1][::1]     
+	b=y[0][::1],y[1][::1]
     
-    resta=a
-    c=[]
-    bol=1
-    l=1 
-    for i in range(len(b[0])+1-len(a[0])): #Cual es más grande
-        B=res(resta,b)
-        if B[0][0]=="-":
-            bol=0
-               
-            c.append(0)
-            r3=resta[1][0]
-            ra=resta[0]+[r3]
-            resta[1].pop(0)
-            rb=resta[1]
-            if rb==[]:
-                rb=rb+[0]
-            resta=ra,rb
-        else:
-            break
+	resta=a
+	c=[]
+	bol=1
+	l=1 
+	for i in range(len(b[0])+1-len(a[0])): #Cual es más grande
+		B=res(resta,b)
+		if B[0][0]=="-":
+			bol=0
+				
+			c.append(0)
+			r3=resta[1][0]
+			ra=resta[0]+[r3]
+			resta[1].pop(0)
+			rb=resta[1]
+			if rb==[]:
+				rb=rb+[0]
+			resta=ra,rb
+		else:
+			break
                 
             
             
-    while len(c)<50: 
-        for k in range(10,-1,-1):
-            if k==10:
-                decen=([1,0],[0])
-                pro=mult(b,decen)
-            else:
-                decen=([0,k],[0])
-                pro=mult(b,decen)
+	while len(c)<DEC: 
+		for k in range(10,-1,-1):
+			if k==10:
+				decen=([1,0],[0])
+				pro=mult(b,decen)
+			else:
+				decen=([0,k],[0])
+				pro=mult(b,decen)
                 
-            resid=res(resta,pro)    
-            if resid[0][0]=="+":
-                break
+			resid=res(resta,pro)    
+			if resid[0][0]=="+":
+				break
             
-        if k==10: #Aumentando una cifra al divisor
-            r=b[1][0]
-            be=b[0]+[r]
-            b[1].pop(0)
-            bd=b[1]  
-            b=be,bd
-            if b[1]==[]:
-                bd=bd+[0]
-            b=be,bd
-            l=l+1
+		if k==10: #Aumentando una cifra al divisor
+			r=b[1][0]
+			be=b[0]+[r]
+			b[1].pop(0)
+			bd=b[1]  
+			b=be,bd
+			if b[1]==[]:
+				bd=bd+[0]
+			b=be,bd
+			l=l+1
             
                                         
-        else:
-            resid[0].pop(0)
-            r2=resid[1][0]
-            re=resid[0]+[r2]
-            resid[1].pop(0)
-            rd=resid[1]
-            resta=re,rd
-            c.append(k)
+		else:
+			resid[0].pop(0)
+			r2=resid[1][0]
+			re=resid[0]+[r2]
+			resid[1].pop(0)
+			rd=resid[1]
+			resta=re,rd
+			c.append(k)
             
-        if resta==([0,0],[]):
-            break
+		if resta==([0,0],[]):
+			break
                         
            #print "ahora residuo es" 
            #print resta
                  
-    c1=[]
-    if bol==0:
-        c1=[0]
-        c.pop(0)
-    else: 
-        for i in range(l):
-            if len(c)<l:
-                c.append(0)
-            c1.append(c[0])
-            c.pop(0)
-    if c==[]:
-        c=[0]        
-    coc=c1,c
-    return coc
-
+	c1=[]
+	if bol==0:
+		c1=[0]
+		c.pop(0)
+	else: 
+		for i in range(l):
+			if len(c)<l:
+				c.append(0)
+			c1.append(c[0])
+			c.pop(0)
+	if c==[]:
+		c=[0]        
+	coc=c1,c
+	return coc
+	
 def comparacion(a, b):
     pass
 
