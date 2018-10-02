@@ -291,6 +291,8 @@ def mult(a,b):
     return prod 
 # define MyFloat divicion 
 def divs(x,y):
+	
+    DEC=30
              
     a=x[0][::1],x[1][::1]     
     b=y[0][::1],y[1][::1]
@@ -317,7 +319,7 @@ def divs(x,y):
                 
             
             
-    while len(c)<50: 
+    while len(c)<DEC: 
         for k in range(10,-1,-1):
             if k==10:
                 decen=([1,0],[0])
@@ -493,5 +495,10 @@ if __name__ == "__main__":
 					dk=Tupla2*Tuplak
 					dkm1=dk+Tupla1
 					usdkm1=Tupla1/dkm1
-					Pie2=Pie2+usdkm1
+					h=ka[0]
+					if h % 2 ==0:
+						Pie2=Pie2+usdkm1
+					else:
+						Pie2=res(Pie2,usdkm1)
+
 	print (Pie2)
