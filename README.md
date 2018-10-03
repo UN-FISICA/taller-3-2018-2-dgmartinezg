@@ -24,8 +24,14 @@ a-b
 Despues con estas operaciones defnindas para las tuplas de listas
 se procedio a calcular pi con estas operaciones
 
+
+
 ~~
-	#calculo de pi 
+
+
+
+
+#calculo de pi 
 	Pie2=MyFloat(([0],[0]))
 	Tupla1=MyFloat(([1],[0]))
 	Tupla2=MyFloat(([2],[0]))
