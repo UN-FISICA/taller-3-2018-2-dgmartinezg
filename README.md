@@ -10,15 +10,17 @@ En el archivo MyFloat.py esta todo las definiciones y la clase MyFloat, tambien 
 Para operar las tupla, lo que hice fue defnir las operaciones componente a componente entre las listas de cada tupla
 Para efectuar las suma de dos tupla hace falta hacer lo siguiente:
 ~~
-a=MyFloat([5,5,6],[5,5,6])
-b=MyFloat([a,7,6],[5,8,9])
+
+	a=MyFloat([5,5,6],[5,5,6])
+	b=MyFloat([a,7,6],[5,8,9])
 ~~
 Esto lo que hace es convertir las tuplas a la forma en la cual se va a operar, seguido esto se puede entonces hacer cualquier operacion entre a y b
 ~~
-a*b
-a/b
-a+b
-a-b
+
+	a*b
+	a/b
+	a+b
+	a-b
 ~~
 
 Despues con estas operaciones defnindas para las tuplas de listas
