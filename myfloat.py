@@ -19,7 +19,7 @@ def imprimir(a):
     
     print (r)
     return r
-def Cadena(a):
+def cadena(a):
     m=a[0]
     n=a[1]
     inter=""
@@ -76,262 +76,419 @@ def Sum(x,y):
         return rs
 
 
-def Suma(x,y):
-        
-        a=x[1][::]
-        b=y[1][::]
-        c=x[0][::-1]
-        d=y[0][::-1]
-        
-        nd=max(len(a),len(b))
-        red=0
-        rs=[]
-        
-        for i in range(nd-1,-1,-1):
-            
-            if i>=len(a):
-                na=0
-            else:
-                na=a[i]
-        
-            if i>=len(b):
-                nb=0
-            else:
-                nb=b[i]
-        
-            
-            s=na+nb+red
-            if s<10:
-                red=0
-            else:
-                red=1
-            
-            rs.append(s%10)
-        
-        rs.reverse()
-        
-       
-        
-        nmax=max(len(c),len(d))
-       
-        rent=[]
-        
-        for j in range(nmax):
-            if j>=len(c):
-                na=0
-            else:
-                na=c[j]
-        
-            if j>=len(d):
-                nb=0
-            else:
-                nb=d[j]
-        
-            
-            s2=na+nb+red
-            if s2<10:
-                red=0
-            else:
-                red=1
-            
-            rent.append(s2%10)
-            
-        if red==1:
-            rent.append(1)
-            
-        rent.reverse()
-        
-        
-        return rent,rs 
+def suma(a,b):
+
+    #a=([8,3,5,6],[3,2,1,9])
+    #b=([8,4,5,3],[7,3,2,1,8,7,9])
+
+    xe=[]
+    xd=[]
+    ye=[]
+    yd=[]
+    #print (len(a[0]))
+    for i in range(len(a[0])):
+        xe.append(a[0][i])
+
+    #print (len(a[1]))
+    for i in range(len(a[1])):
+        xd.append(a[1][i])
+
+    #print (len(b[0]))
+    for i in range(len(b[0])):
+        ye.append(b[0][i])
+
+    #print (len(b[1]))
+    for i in range(len(b[1])):
+        yd.append(b[1][i]) 
+
+    #los anteriores cuatro for's extraen las listas de la tuplas y las nombra dentro de 
+    #los numero como xe parte entera etc
+
+    #print(xe,"*", xd,"*",ye,"*",yd) 
+
+
+    x=xe,xd
+    y=ye,yd
+    #print(x,"**",y)
+    maxe=max(len(xe),len(ye))
+    maxd=max(len(xd),len(yd))
+    #print(maxe,"**",maxd)
+
+    #ahora la idea es hacer que cada uno tengan la misma cantidad de cifras
+    #la decimal agregar ceros a las derecha y la entera a la izquierda
+
+    #parte entera
+    xe.reverse()
+    ye.reverse()
+
+    if len(xe)<len(ye):         #Igualando los tamaños de la parte entera
+        for i in range(len(ye)-len(xe)):
+            xe.append(0)
+    elif len(ye)<len(xe):
+        for i in range(len(xe)-len(ye)):
+            ye.append(0)
+    xe.reverse()
+    ye.reverse()
+
+    #print ("partes enteras",xe,ye)
+
+    #parte decimal
+
+
+    if len(xd)<len(yd):         #Igualando los tamaños de la parte decimal
+        for i in range(len(yd)-len(xd)):
+            xd.append(0)
+    elif len(yd)<len(xd):
+        for i in range(len(xd)-len(yd)):
+            yd.append(0)
+
+    #print ("partes decimales",xd,yd)
+
+    #en este punto se esta listo para efectuar la suma 
+
+    xd.reverse()
+    yd.reverse()
+    rd=0
+    sd=[]   #resultado de la suma decimal
+    for i in range(len(xd)):
+        s=xd[i]+yd[i]+rd
+        if s>=10:
+            rd=1
+            s=(s%10)
+            sd.append(s)
+        else:
+            rd=0
+            sd.append(s)
+    sd.reverse()
+    #print ("resultado de la suma decimal",sd, "residuo decimal= ",residuod)
+
+    #ahora la suma de la parte entera
+
+    xe.reverse()
+    ye.reverse()
+
+    re=rd
+    see=[]   #resultado de la suma entera
+    for i in range(len(xe)):
+        se=xe[i]+ye[i]+re
+        if se>=10:
+            re=1
+            se=(se%10)
+            see.append(se)
+        else:
+            re=0
+            see.append(se)
+    see.append(re)
+    see.reverse()
+    #print (see , "re=",re)
+
+    #print (see, sd)
+    
+    return(see, sd)
     
                 
 # define MyFloat resta     
     
-def res(a,b):
-    me=[0]+b[0]
-    md=[1]+b[1]
-    me.pop(0)
-    md.pop(0)
-    m=me,md
-    le=[0]+a[0]
-    ld=[1]+a[1]
-    le.pop(0)
-    ld.pop(0)
-    l=le,ld
-    
-    ea,da=l
-    eb,db=m
-    
-    ea.reverse()
-    eb.reverse()
-    
-    
-    if len(ea)<len(eb):         #Igualando los tamaños de la parte entera
-        for i in range(len(eb)-len(ea)):
-            ea.append(0)
-    elif len(eb)<len(ea):
-        for i in range(len(ea)-len(eb)):
-            eb.append(0)
-    if len(da)<len(db):         #Igualando los tamaños de la parte decimal
-        for i in range(len(db)-len(da)):
-            da.append(0)
-    elif len(db)<len(da):
-        for i in range(len(da)-len(db)):
-            db.append(0)
-        
-    da.reverse()
-    db.reverse()
-    ca=da+ea
-    cb=db+eb
-    
-      
-        
-    for i in range(len(ca)-1,-1,-1): #Comprobando cual es el número mayor
-        if ca[i]<cb[i]:
-            c=cb
-            d=ca
-            sig="-"
-            bolen=1
-            break
-        elif ca[i]>cb[i]:
-            c=ca
-            d=cb
-            sig="+"
-            bolen=1
-            break
-        else:
-            bolen=2
-        
-        
-    if bolen==2: #Si los números son iguales da 0 
-        sig="+"
-        r=[0]
-        er=[0] 
-           
-           
-    else:
-        r=[]
-        for i in range(len(c)):      #Efectuando resta
-            
-            if c[i]<d[i]:
-                
-                if c[i+1]!=0:
-                    c[i+1]=c[i+1]-1     
-                else:
-                    c[i+1]=9
-                    for k in range(i+2,len(c)):
-                        if c[k]==0:
-                            c[k]=9
-                        else:
-                            c[k]=c[k]-1
-                            break
-                   
-                   
-                r.append(10+c[i]-d[i])
-            else:
-                r.append(c[i]-d[i])
-        
-            
-        r.reverse() #Organizando resta y quitando ceros a la izquierda   
-          
-        #creando la tupla de la resta
-        er=[]
-        for z in range(len(r)-len(da)):
-            er.append(r[0])
-            r.pop(0)
-               
-        #Quitando ceros
-        for q in range(len(er)):
-            if er[0]==0:
-                del er[0]
-                   
-            else:
-                break
-        if er==[]:
-            er=[0]
-        
-    return [sig]+er,r   
-# define MyFloat multiplicacion        
-def mult(a,b):
+def resta(a,b):
+    #a=([9,8,3],[8,2,1,9])
+    #b=([8,4,8,9,8,7],[7,3,2,9])
 
-    ca=[0]+a[0]+a[1]
-    cb=[0]+b[0]+b[1]
-             
-    ca.reverse()
-    cb.reverse()
+    xe=[]
+    xd=[]
+    ye=[]
+    yd=[]
+    #print (len(a[0]))
+    for i in range(len(a[0])):
+        xe.append(a[0][i])
+
+    #print (len(a[1]))
+    for i in range(len(a[1])):
+        xd.append(a[1][i])
+
+    #print (len(b[0]))
+    for i in range(len(b[0])):
+        ye.append(b[0][i])
+
+    #print (len(b[1]))
+    for i in range(len(b[1])):
+        yd.append(b[1][i]) 
+
+    #los anteriores cuatro for's extraen las listas de la tuplas y las nombra dentro de 
+    #los numero como xe parte entera etc
+
+    #print(xe,"*", xd,"*",ye,"*",yd) 
+
+
+    x=xe,xd
+    y=ye,yd
+    #print(x,"**",y)
+    maxe=max(len(xe),len(ye))
+    maxd=max(len(xd),len(yd))
+    #print(maxe,"**",maxd)
+
+    #ahora la idea es hacer que cada uno tengan la misma cantidad de cifras
+    #la decimal agregar ceros a las derecha y la entera a la izquierda
+
+    #parte entera
+    xe.reverse()
+    ye.reverse()
+
+    if len(xe)<len(ye):         #Igualando los tamaños de la parte entera
+        for i in range(len(ye)-len(xe)):
+            xe.append(0)
+    elif len(ye)<len(xe):
+        for i in range(len(xe)-len(ye)):
+            ye.append(0)
+    xe.reverse()
+    ye.reverse()
+
+    #print ("partes enteras",xe,ye)
+
+    #parte decimal
+
+
+    if len(xd)<len(yd):         #Igualando los tamaños de la parte decimal
+        for i in range(len(yd)-len(xd)):
+            xd.append(0)
+    elif len(yd)<len(xd):
+        for i in range(len(xd)-len(yd)):
+            yd.append(0)
+    #print ("partes decimales",xd,yd)
+
+    #ahora convertimos a cadena para evaluar cual numeo es mas grande 
+    numero=float(cadena(a))-float(cadena(b))
+    #print("la resta es ", numero)
+    nop=0
+    if numero<0:
+        nop=1 
+        #print ("a es menor que b", "**",nop)
+    else:
+        nop=2
+        #print ("b es menor que a","**",nop)
+
+
+
+
+
+
+    if nop==1:
+
+        #parte decimal
+
+        #hacer la resta de b-a
+        xd.reverse()
+        yd.reverse()
+        rt=[] #resultado de la resta
+        rst=0 #residuo de la resta
+        res=0
+        r=0
+        for i in range(len(xd)):
+            yd[i]=yd[i]-res
+            if yd[i]>xd[i]:
+                r=yd[i]-xd[i]
+                rt.append(r)
+                res=0
+            if yd[i]<xd[i]:
+                yd[i]=yd[i]+10
+
+                if i == len(xd): #si es el ultimo numero de la resta hay que solo hacer la resta 
+                    r=yd[i]-xd[i] #y guardar el residuo como 1
+                    rt.append(r)
+                    res=1                
+                else:
+                           #si no es el ultimo se le resta al siguiente uno
+                    r=yd[i]-xd[i]
+                    rt.append(r)
+                    res=1 
+
+            if yd[i]==xd[i]:
+                rt.append(0)
+                res=0
+        rt.reverse()
+        #print(rt , res)
+        #ahora hay que restar la parte entera, para esto hay que tener en cuenta el residuo anterior
+        #######
+
+
+        xe.reverse()
+        ye.reverse()
+        rte=[] #resultado de la resta 
+        rese=res
+        re=0
+        for i in range(len(xe)):
+            ye[i]=ye[i]-rese
+            if ye[i]>xe[i]:
+                re=ye[i]-xe[i]
+                rte.append(re)
+                rese=0
+            if ye[i]<xe[i]:
+                ye[i]=ye[i]+10
+                re=ye[i]-xe[i]
+                rte.append(re)
+                rese=1
+            if ye[i]==xe[i]:
+                rte.append(0)
+                rese=0
+        rte.reverse() 
+
+    if nop==2:
+        #parte decimal
+
+        #hacer la resta de b-a
+        xd.reverse()
+        yd.reverse()
+        rt=[] #resultado de la rest
+        res=0
+        r=0
+        for i in range(len(xd)):
+            xd[i]=xd[i]-res
+            if xd[i]>yd[i]:
+                r=xd[i]-yd[i]
+                rt.append(r)
+                res=0
+            if xd[i]<yd[i]:
+                xd[i]=xd[i]+10
+                r=xd[i]-yd[i] 
+                rt.append(r)
+                res=1                    
+            if xd[i]==yd[i]:
+                rt.append(0)
+                res=0
+        rt.reverse()
+        #print(rt , res)
+        #ahora hay que restar la parte entera, para esto hay que tener en cuenta el residuo anterior
+
+        #parte entera
+
+        xe.reverse()
+        ye.reverse()
+        rte=[] #resultado de la resta 
+        rese=res
+        re=0
+        for i in range(len(xe)):
+            xe[i]=xe[i]-rese
+            if xe[i]>ye[i]:
+                #print("*****",xe[i],ye[i])
+                re=xe[i]-ye[i]
+                #print ("re=",i,"**", re)
+                rte.append(re)
+                rese=0
+            if xe[i]<ye[i]:
+                xe[i]=xe[i]+10
+                #print("**lll***",xe[i],ye[i])
+                re=xe[i]-ye[i]
+                #print ("re=",i,"**", re)
+                rte.append(re)
+                rese=1
+            if xe[i]==ye[i]:
+                rte.append(0)
+                rese=0
+            #print (rte[i])
+        rte.reverse()
+
+    return(rte,rt) #restorna dos listas
+# define MyFloat multiplicacion        
+def multiplicacion(a,b):
+    #a=([9],[8,2,8,9,7,8,7,9,3,1,5,7,8,9,3,2,4,8,9,6,9,3,2,1,5,7,4,8,9])
+    #b=([8],[7,8])
+
+    x=[0]+a[0]+a[1]
+    y=[0]+b[0]+b[1]
+
+    #print("x=",x)
+    #print("y=",y)
+
+    x.reverse()
+    y.reverse()
     res=0
-             
-    suma=[0]
-    for i in range(len(cb)-1):
-        P=[]
-        for j in range(len(ca)):
-            x=cb[i]*ca[j]+res
-            P.append(x%10)
-            res=int(x/10)
-              
-        Pd=i*[0]+P
-        Pd.reverse()
-              
-        suma=Sum(suma,Pd)
-                 
-              
-    p=len(suma)-1-len(a[1])-len(b[1])
+
+    rsult=[0]
+    for i in range(len(y)-1):
+        p=[]
+        for j in range(len(x)):
+            f=y[i]*x[j]+res
+            p.append(f%10)
+            res=int(f/10)
+        pd=i*[0]+p #se agraga el cero de la suma 
+        pd.reverse()
+        rsult=Sum(rsult,pd) #se ejecuta la suma de dos listas
+    #print("resultado de la multiplicaion", rsult)
+    h=len(rsult)
+    #print(h)
+    g=len(a[1])
+    m=len(b[1])
+
+    u=h-1-g-m
     PZ=[]
     PD=[]
-    for k in range(len(suma)):
-        if k<=p:
-            PZ.append(suma[k])
+    for k in range(h):
+        if k<=u:
+            PZ.append(rsult[k])
         else:
-            PD.append(suma[k]) 
-                                    
+            PD.append(rsult[k]) 
+
+
     if PZ[0]==0:
         PZ.pop(0)
-    prod=PZ,PD
-              
-    return prod 
+
+    prod=PZ,PD #retorna dos listas, una con la parta entera otra con la parte decimal
+
+
+    #print( prod)
+    return(prod)
+
+
 # define MyFloat divicion 
 def divs(x,y):
-	
+    
     DEC=30
              
     a=x[0][::1],x[1][::1]     
     b=y[0][::1],y[1][::1]
     
-    resta=a
+    resa=a
     c=[]
     bol=1
-    l=1 
+    l=1
+    #print("**",resa,b)
     for i in range(len(b[0])+1-len(a[0])): #Cual es más grande
-        B=res(resta,b)
-        if B[0][0]=="-":
+        B=resta(resa,b)
+        #print("BIEN",B)
+        t1=float(cadena(resa))
+        t2=float(cadena(b))
+        #print(t1,t2)
+        t=t1-t2
+        
+        if t<0:
             bol=0
                
             c.append(0)
-            r3=resta[1][0]
-            ra=resta[0]+[r3]
-            resta[1].pop(0)
-            rb=resta[1]
+            r3=resa[1][0]
+            ra=resa[0]+[r3]
+            resa[1].pop(0)
+            rb=resa[1]
             if rb==[]:
                 rb=rb+[0]
-            resta=ra,rb
+            resa=ra,rb
         else:
             break
-                
             
             
+    #print(len(c))        
     while len(c)<DEC: 
         for k in range(10,-1,-1):
             if k==10:
                 decen=([1,0],[0])
-                pro=mult(b,decen)
+                pro=multiplicacion(b,decen)
             else:
                 decen=([0,k],[0])
-                pro=mult(b,decen)
+                pro=multiplicacion(b,decen)
                 
-            resid=res(resta,pro)    
-            if resid[0][0]=="+":
+            resid=resta(resa,pro)
+            g=float(cadena(resa))-float(cadena(pro))
+            if g>0:
                 break
-            
+           
         if k==10: #Aumentando una cifra al divisor
             r=b[1][0]
             be=b[0]+[r]
@@ -350,15 +507,15 @@ def divs(x,y):
             re=resid[0]+[r2]
             resid[1].pop(0)
             rd=resid[1]
-            resta=re,rd
+            resa=re,rd
             c.append(k)
             
-        if resta==([0,0],[]):
+        if resa==([0,0],[]):
             break
                         
            #print "ahora residuo es" 
            #print resta
-                 
+    #print("******",resa)              
     c1=[]
     if bol==0:
         c1=[0]
@@ -373,9 +530,134 @@ def divs(x,y):
         c=[0]        
     coc=c1,c
     return coc
+def comparacion(a,b):
 
-def comparacion(a, b):
-    pass
+
+
+    ###toca igualar los tamaños para la parte entera
+    if len(ae)<len(be):
+        ae.reverse()
+        for i in range(len(be)-len(ae)):
+            ae.append(0)
+        ae.reverse()
+
+    elif len(be)<len(ae):
+        be.reverse()
+        for i in range(len(ae)-len(be)):
+            be.append(0)
+        be.reverse()
+
+    #print("**",x,y)
+
+    #igualando la parte decimal 
+
+    if len(ad)<len(bd):         #Igualando los tamaños de la parte decimal
+        for i in range(len(bd)-len(ad)):
+            ad.append(0)
+    elif len(bd)<len(ad):
+        for i in range(len(ad)-len(bd)):
+            bd.append(0)
+
+    #print("**",x,y)
+
+
+
+    #quitando los ceros de la izquierda de la parte entera
+
+    while i<len(ae):
+        if ae[i]!=0:
+            break
+        else:
+            ae.pop(ae[i])
+        i=0
+
+
+    while i<len(be):
+
+        if be[i]!=0:
+            break
+        else:
+            be.pop(be[i])
+        i=0
+
+
+
+
+
+    #print("partes enteras",ae,"*",be)
+    #print("partes decimales",ad,"*",bd)
+    ####
+    m=max(len(ae),len(be))
+    #print("m",m)
+    n=m-1
+    #print(n)
+
+    z=max(len(ad),len(bd))
+    #print("z",z)
+    c=z-1
+    #print(c)
+
+
+    for j in range(m):
+        if ae[j]==be[j]:
+            #print("aaa")
+            if j==n:
+                igue=1
+                #print("las partes enteras son iguales")
+                break
+            else:
+                continue
+
+        else:
+            igue=2
+            #print("las partes enteras son diferentes")
+            break
+
+    for j in range(z):
+        if ad[j]==bd[j]:
+            #print("aaa")
+            if j==c:
+                igued=1
+                #print("las partes decimales son iguales")
+                break
+            else:
+                continue
+
+        else:
+            igued=2
+            #print("las partes decimales son diferentes")
+            break   
+    if igue==1 and igued==1:
+        print("iguales")
+        return True
+    else:
+        print("diferentes")
+        return False
+
+def ImTupig(a):
+    num=a
+    return num
+    
+def convtupl(otro): #Convierte a Tupla
+    t=str(otro)
+    for i in range(len(t)):
+        if t[i]==".":
+            dec=True
+            break
+        else:
+            dec=False
+            
+    etupl=[]
+    dtupl=[]
+    for j in range(0,i):
+        etupl.append(int(t[j]))
+    if dec==True:
+        for j in range(i+1,len(t)):
+            dtupl.append(int(t[j]))
+    else:
+        dtupl.append(0)
+        etupl.append(int(t[i]))
+    return etupl,dtupl
 
 
 
@@ -386,9 +668,7 @@ class MyFloat:
     def __init__(self,num):
         self.n=num
         self.e=num[0]
-        self.d=num[1]
-        
-         
+        self.d=num[1]       
     
        
            
@@ -397,28 +677,26 @@ class MyFloat:
         if isinstance(otro,MyFloat):  
             a=self.n
             b=otro.n
-            c=Suma(self.n,otro.n)
+            c=suma(self.n,otro.n)
           
             return MyFloat(c)
        
         elif isinstance(otro,(int,float)):
             tup=MyFloat(convtupl(otro))
-            return MyFloat(Suma(self.n,tup.n))
+            return MyFloat(suma(self.n,tup.n))
         
         
-    
-    def __radd__(self,otro):
-        return self.__add__(otro)
-    
+#####
+        
     def __sub__(self,otro):
         if isinstance(otro,MyFloat):
             a=self.n
             b=otro.n
-            return MyFloat(res(self.n,otro.n))
+            return MyFloat(resta(self.n,otro.n))
             
         elif isinstance(otro,(int,float)):
             tup=MyFloat(convtupl(otro))
-            return MyFloat(res(self.n,tup.n))
+            return MyFloat(resta(self.n,tup.n))
     
     def __rsub__(self,otro):
         
@@ -434,10 +712,10 @@ class MyFloat:
         if isinstance(otro,MyFloat):
             a=self.n
             b=otro.n  
-            return MyFloat(mult(a,b))  
+            return MyFloat(multiplicacion(a,b))  
         elif isinstance(otro,(int,float)):
             tup=MyFloat(convtupl(otro))
-            return MyFloat(mult(self.n,tup.n))
+            return MyFloat(multiplicacion(self.n,tup.n))
                 
     def __rmul__(self,otro):
         return self.__mul__(otro)
@@ -450,55 +728,86 @@ class MyFloat:
         elif isinstance(otro,(int,float)):
             tup=MyFloat(convtupl(otro))
             return MyFloat(divs(self.n,tup.n))
-        #return print ("algo")
     
     def __rtruediv__(self,otro):
         if isinstance(otro,(int,float)):
             tup=MyFloat(convtupl(otro))
-            return MyFloat(divs(tup.n,otro.n))
-          # return print ("algo") 
+            return MyFloat(division(tup.n,otro.n))
+
+    
+###3
+    def __radd__(self,otro):
+        return self.__add__(otro)
+    
     def __eq__(self, otro):
-        if res(self.n,otro.n)==(["+",0],[0]):
+        if resta(self.n,otro.n)==(["+",0],[0]):
             return True
         else:
             return False
             
     def __ne__(self, otro):
-        if res(self.n,otro.n)!=(["+",0],[0]):
+        if resta(self.n,otro.n)!=(["+",0],[0]):
             return True
         else:
             return False
     
     
     def __str__(self):
-        t1=self.n
-        return Cadena(t1)
-    
+        return '{}'.format(self.n)
+
     def __repr__(self):
-        return self.__str__()
-	
+        return '{}'.format(self.n)
+        
+    def __getitem__(self, key):
+        return self.pi[key]
+    	
 	
 
 if __name__ == "__main__":
     
-	#calculo de pi 
-	Pie2=MyFloat(([0],[0]))
-	Tupla1=MyFloat(([1],[0]))
-	Tupla2=MyFloat(([2],[0]))
-		
+	#calculo de pi
+    # x=0.0
+    # for m in range(0,10):
+        # if m%2==0:
+            # x=x+4/(2*MyFloat((,[0,0]))+1)   
+        # else:
+            # x=x-4/(2*MyFloat((ka,[0,0]))+1)
+   
+    # print(imprimir(x))
+	
+	
+	
+	
+	Pie2=MyFloat(([0,0],[0,0]))
+	Tupla1=MyFloat(([0,1],[0,0]))
+	tupla4=MyFloat(([0,4],[0,0]))
+	Tupla2=MyFloat(([0,2],[0,0]))
+	
 	for l in range(0,10):
 		for j in range(0,10):
 			for i in range(0,10):
-				for k in range(0,10,2):
+				for k in range(0,10):
 					ka=[l]+[j]+[i]+[k]
 					Tuplak=MyFloat((ka,[0]))
+                
 					dk=Tupla2*Tuplak
 					dkm1=dk+Tupla1
-					usdkm1=Tupla1/dkm1
-					h=ka[0]
-					if h % 2 ==0:
+					usdkm1=tupla4/dkm1
+				
+					
+					if k % 2 ==0:
 						Pie2=Pie2+usdkm1
 					else:
-						Pie2=res(Pie2,usdkm1)
+						Pie2=Pie2-usdkm1
+	
+	# while i<len(Pie2[0]):
+		# if Pie2[0][i]!=0:
+			# break
+		# else:
+			# Pie2[0].pop(Pie2[0][i])
+		# i=0
+	
+	pi=Pie2
 
-	print (Pie2)
+	print (pi)
+		
