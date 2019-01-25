@@ -763,8 +763,9 @@ class MyFloat:
     	
 	
 #cualdo se ejecuta con 1000, es decir los primeros cuatro "for" el resultado es 3.1392 comparado con el resultado en mathematica
-#con la misma cantidad de pasos es 3.1425, sin embargo con 10000 el resultado ya es 3.1416
-#A pesar de esto, el programa con 1000 pasos se demora 5 minutos y con 10000 es demasiado demorado en mi pc 
+#con la misma cantidad de pasos es 3.1425, sin embargo con 10000 el resultado ya es 3.1416 en mathematica
+#A pesar de esto, el programa con 1000 pasos se demora aproximadamnte 10 minutos y con 10000 es demasiado demorado en mi pc
+#y es un resultado que no pude obtener
 if __name__ == "__main__":
     
     Pie2=MyFloat(([0,0],[0,0]))           #aquí se definen las tuplas que son utilizadas para efectuar la opereacion 
