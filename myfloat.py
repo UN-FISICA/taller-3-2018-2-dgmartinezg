@@ -735,7 +735,7 @@ class MyFloat:
             return MyFloat(division(tup.n,otro.n))
 
     
-###3
+###
     def __radd__(self,otro):
         return self.__add__(otro)
     
@@ -762,52 +762,34 @@ class MyFloat:
         return self.pi[key]
     	
 	
-
+#cualdo se ejecuta con 1000, es decir los primeros cuatro "for" el resultado es 3.1392 comparado con el resultado en mathematica
+#con la misma cantidad de pasos es 3.1425, sin embargo con 10000 el resultado ya es 3.1416
+#A pesar de esto, el programa con 1000 pasos se demora 5 minutos y con 10000 es demasiado demorado en mi pc 
 if __name__ == "__main__":
     
-	#calculo de pi
-    # x=0.0
-    # for m in range(0,10):
-        # if m%2==0:
-            # x=x+4/(2*MyFloat((,[0,0]))+1)   
-        # else:
-            # x=x-4/(2*MyFloat((ka,[0,0]))+1)
-   
-    # print(imprimir(x))
-	
-	
-	
-	
-	Pie2=MyFloat(([0,0],[0,0]))
-	Tupla1=MyFloat(([0,1],[0,0]))
-	tupla4=MyFloat(([0,4],[0,0]))
-	Tupla2=MyFloat(([0,2],[0,0]))
-	
-	for l in range(0,10):
-		for j in range(0,10):
-			for i in range(0,10):
-				for k in range(0,10):
-					ka=[l]+[j]+[i]+[k]
-					Tuplak=MyFloat((ka,[0]))
-                
-					dk=Tupla2*Tuplak
-					dkm1=dk+Tupla1
-					usdkm1=tupla4/dkm1
-				
-					
-					if k % 2 ==0:
-						Pie2=Pie2+usdkm1
-					else:
-						Pie2=Pie2-usdkm1
-	
-	# while i<len(Pie2[0]):
-		# if Pie2[0][i]!=0:
-			# break
-		# else:
-			# Pie2[0].pop(Pie2[0][i])
-		# i=0
-	
-	pi=Pie2
+    Pie2=MyFloat(([0,0],[0,0]))           #aquí se definen las tuplas que son utilizadas para efectuar la opereacion 
+    Tupla1=MyFloat(([0,1],[0,0]))
+    tupla4=MyFloat(([0,4],[0,0]))
+    Tupla2=MyFloat(([0,2],[0,0]))
+    
+    for l in range(0,10):  
+        for j in range(0,10):
+            for i in range(0,10):
+                for k in range(0,10):
+                    for h in range(0,10):     # los 5 "for" suman en cada paso una unidad 1,2,3,4,...99999
+                        ka=[l]+[j]+[i]+[k]
+                        Tuplak=MyFloat((ka,[0]))
 
-	print (pi)
-		
+                        dk=Tupla2*Tuplak
+                        dkm1=dk+Tupla1
+                        usdkm1=tupla4/dkm1
+
+
+                        if h % 2 ==0: #aqui se realiza la suma teniedo en cuenta que los impares restan y los pares sumas
+                            Pie2=Pie2+usdkm1
+                        else:
+                            Pie2=Pie2-usdkm1
+
+    #imprimir(Pie2) esta opcion imprime el numero como una cadena de caracteres 
+
+    print (pi)
